@@ -11,6 +11,10 @@ use OAuth\Common\Http\Uri\UriInterface;
 
 class Facebook extends AbstractService
 {
+	const SCOPE_EMAIL = 'email';
+	const SCOPE_READ_FRIEND_LIST = 'read_friendlists';
+	const SCOPE_USER_PHOTOS = 'user_photos';
+
     public function __construct(Credentials $credentials, ClientInterface $httpClient, TokenStorageInterface $storage, $scopes = array(), UriInterface $baseApiUri = null)
     {
         parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);

@@ -22,6 +22,8 @@ abstract class AbstractService implements ServiceInterface
     /** @var \OAuth\Common\Storage\TokenStorageInterface */
     protected $storage;
 
+	protected $service;
+
     /**
      * @param \OAuth\Common\Consumer\Credentials $credentials
      * @param \OAuth\Common\Http\Client\ClientInterface $httpClient
@@ -32,6 +34,9 @@ abstract class AbstractService implements ServiceInterface
         $this->credentials = $credentials;
         $this->httpClient   = $httpClient;
         $this->storage = $storage;
+
+		$classname = get_class($this);
+		$this->service = preg_replace('/^.*\\\\/', '', $classname);
     }
 
     protected function determineRequestUriFromPath($path, UriInterface $baseApiUri = null)
@@ -74,10 +79,8 @@ abstract class AbstractService implements ServiceInterface
     /**
      * @return string
      */
-    protected function service() 
+    public function getService()
     {
-        // get class name without backslashes
-        $classname = get_class($this);
-        return preg_replace('/^.*\\\\/', '', $classname);
+		return $this->service;
     }
 }
