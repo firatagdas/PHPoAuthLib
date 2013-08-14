@@ -14,6 +14,8 @@ class Session implements TokenStorageInterface
      */
     protected $sessionVariableName;
 
+	protected $selfStarted = false;
+
     /**
      * @param bool $startSession Whether or not to start the session upon construction.
      * @param string $sessionVariableName the variable name to use within the _SESSION superglobal
@@ -22,6 +24,7 @@ class Session implements TokenStorageInterface
     {
         if( $startSession && !isset($_SESSION)) {
             session_start();
+			$this->selfStarted = true;
         }
 
         $this->sessionVariableName = $sessionVariableName;
@@ -80,6 +83,9 @@ class Session implements TokenStorageInterface
 
     public function  __destruct()
     {
-        session_write_close();
+		if ($this->selfStarted)
+		{
+        	session_write_close();
+		}
     }
 }
