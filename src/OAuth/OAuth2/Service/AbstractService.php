@@ -144,7 +144,7 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
     /**
     * Accessor to the storage adapter to be able to retrieve tokens
     *
-    * @return OAuth\Common\Storage\TokenStorageInterface
+    * @return \OAuth\Common\Storage\TokenStorageInterface
     */
     public function getStorage()
     {
